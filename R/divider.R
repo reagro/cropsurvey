@@ -1,5 +1,5 @@
 # Author: Robert Hijmans
-# May 2021
+# January 2022
 # License GPL3
 
 splitNS <- function(x) {
@@ -14,7 +14,7 @@ splitWE <- function(x) {
 	list(w=x[, 1:m, drop=FALSE], e=x[, (m+1):ncol(x), drop=FALSE])
 }
 
-divider <- function(x, n=2, start="ns") {
+divider <- function(x, n=2, start="ns", crop=NULL) {
 	x <- classify(x, cbind(NA, 0))
 	n <- max(round(n), 1)
 	start <- match.arg(tolower(start), c("ns", "ew"))
@@ -31,6 +31,9 @@ divider <- function(x, n=2, start="ns") {
 	}  
 	out <- lapply(out, \(i)as.polygons(ext(i))) |> vect()
 	crs(out) <- crs(out)
+	if (!is.null(border)) {
+		out <- crop(out, border)
+	}
 	out
 }
 
