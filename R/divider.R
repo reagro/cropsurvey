@@ -14,11 +14,15 @@ splitWE <- function(x) {
 	list(w=x[, 1:m, drop=FALSE], e=x[, (m+1):ncol(x), drop=FALSE])
 }
 
-divider <- function(x, n=2, start="ns", border=NULL, rasterize=FALSE) {
-	x <- classify(x, cbind(NA, 0))
+divider <- function(x, n=2, start="ns", border=NULL, rasterize="no") {
+
+	rasterize <- match.arg(tolower(rasterize), c("yes", "no", "both"))
+	if (!is.null(border)) stopifnot(inherits(border, "SpatVector"))
 	n <- max(round(n), 1)
 	start <- match.arg(tolower(start), c("ns", "ew"))
 	north <- start == "ns"
+	
+	x <- classify(x, cbind(NA, 0))
 	out <- list(x)
 	for (i in 1:n) {
 		if (north) {
@@ -35,8 +39,13 @@ divider <- function(x, n=2, start="ns", border=NULL, rasterize=FALSE) {
 	if (!is.null(border)) {
 		out <- crop(out, border)
 	}
-	if (rasterize) {
-		rasterize(out, x, "zones")
+	if (rasterize != "no") {
+		r <- rasterize(out, x, "zones")
+		if (rasterize == "both") {
+			return(list(r=r, v=out))
+		} else {
+			return(r)
+		}
 	} else {
 		out
 	}

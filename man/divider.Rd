@@ -20,10 +20,10 @@ divider(x, n=2, start="ns", border=NULL, rasterize=FALSE)
   \item{n}{positive integer. The number of splits}
   \item{start}{character. To indicate the initial direction of split. "ns" or "ew"}
   \item{border}{NULL or SpatVector to crop the output with}
-  \item{rasterize}{locical. If \code{TRUE}. the zones are rasterized to \code{x}}
+  \item{rasterize}{character. Either "no" (return a SpatVector), "yes" (return a SpatRaster) or "both" return a list with a SpatRaster and a SpatVector}
 }
 
 \value{
-SpatVector
+SpatVector, SpatRaster, or list
 }
 
