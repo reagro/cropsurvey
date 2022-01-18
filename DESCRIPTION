@@ -1,0 +1,11 @@
+Package: cropsurvey
+Type: Package
+Title: Crop survey design
+Version: 0.1-0
+Depends: terra
+Date: 2022-01-18
+Author: Robert Hijmans
+Maintainer: <r.hijmans@gmail.com>
+Description: Functions to design crop surveys  
+License: GPL (>=3)
+
