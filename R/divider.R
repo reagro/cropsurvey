@@ -14,7 +14,7 @@ splitWE <- function(x) {
 	list(w=x[, 1:m, drop=FALSE], e=x[, (m+1):ncol(x), drop=FALSE])
 }
 
-divider <- function(x, n=2, start="ns", crop=NULL) {
+divider <- function(x, n=2, start="ns", border=NULL, rasterize=FALSE) {
 	x <- classify(x, cbind(NA, 0))
 	n <- max(round(n), 1)
 	start <- match.arg(tolower(start), c("ns", "ew"))
@@ -31,9 +31,14 @@ divider <- function(x, n=2, start="ns", crop=NULL) {
 	}  
 	out <- lapply(out, \(i)as.polygons(ext(i))) |> vect()
 	crs(out) <- crs(out)
+	out$zones <- 1:nrow(out)
 	if (!is.null(border)) {
 		out <- crop(out, border)
 	}
-	out
+	if (rasterize) {
+		rasterize(out, x, "zones")
+	} else {
+		out
+	}
 }
 
