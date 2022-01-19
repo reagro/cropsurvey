@@ -1,4 +1,4 @@
 import(terra)
 export(
-divider, sample_regular
+divider, sample_regular, evaluate_sample
 )

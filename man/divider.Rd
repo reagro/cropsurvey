@@ -12,7 +12,7 @@ Divide a region into zones with equal crop area.
 
 
 \usage{
-divider(x, n=2, start="ns", border=NULL, rasterize=FALSE)
+divider(x, n=2, start="ns", border=NULL, rasterize="no")
 }
  
 \arguments{
