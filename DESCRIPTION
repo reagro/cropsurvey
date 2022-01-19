@@ -3,6 +3,7 @@ Type: Package
 Title: Crop survey design
 Version: 0.1-0
 Imports: terra
+Suggests: geodata
 Date: 2022-01-18
 Author: Robert Hijmans
 Maintainer: <r.hijmans@gmail.com>
