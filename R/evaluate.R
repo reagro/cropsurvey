@@ -2,9 +2,10 @@
 # January 2022
 # License GPL3
 
-evaluate_sample <- function(x, s, plot=FALSE) {
+evaluate_sample <- function(x, s, main=names(x), plot=FALSE) {
 	e <- extract(x, s)[,-1, drop=FALSE] |> na.omit()
 	x <- na.omit(values(x))
+	main <- rep_len(main, ncol(x))
 	for (i in 1:ncol(x)) {
 		xx <- x[,i]
 		xx <- xx[xx > 0]
@@ -16,7 +17,7 @@ evaluate_sample <- function(x, s, plot=FALSE) {
 		if (plot) {
 			p <- round(w$p.value, 3)
 			r <- c(0, max(c(reg, ee)))
-			plot(reg, ee, main=paste0(names(e)[i], "  (", p, ")"), las=1,
+			plot(reg, ee, main=paste0(main[i], "  (", p, ")"), las=1,
 				xlab="distribution", ylab="sample", xlim=r, ylim=r)
 			graphics::abline(0,1)
 		} 
