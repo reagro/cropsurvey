@@ -7,7 +7,7 @@ collapse_dist <- function(v, threshold) {
 	while(nrow(xy) > 1) {
 		d <- distance(xy[1,,drop=FALSE], xy[-1,,drop=FALSE], lonlat=lonlat) 
 		if (min(d) < threshold) {
-			w <- which.min(d)
+			w <- which.min(d) + 1
 			out[[i]] <- cbind(mean(c(xy[1,1], xy[w,1])), mean(c(xy[1,2], xy[w,2])))
 			xy <- xy[-c(1,w), , drop=TRUE]
 		} else {
